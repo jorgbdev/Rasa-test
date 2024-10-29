@@ -1,0 +1,44 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - hey there
+    - good morning
+    - good evening
+    - hi there
+    - howdy
+
+- intent: ask_info
+  examples: |
+    - Where is [Harvard University](topic) located?
+    - What are the [plans](info_type) for [Stanford University](topic)?
+    - Tell me about the [courses](info_type) at [MIT](topic).
+    - When was [University of Oxford](topic) founded?
+    - What is the [website](info_type) of [Cambridge University](topic)?
+    - I want to learn about [Harvard](topic)
+    - I'd like information on [Stanford University](topic)
+    - Can you tell me about [MIT](topic)?
+    - Provide details on [University of Oxford](topic)
+    - I want to know more about [Cambridge University](topic)
+
+- intent: inform
+  examples: |
+    - [University](theme)
+    - [Business Objective](theme)
+    - [Product Information](theme)
+    - [FAQ](theme)
+    - I'm interested in the [University](theme) theme
+    - Let's talk about [Business Objective](theme)
+    - Provide information on [Product Information](theme)
+
+- intent: request_human
+  examples: |
+    - I need to speak to a human agent
+    - Connect me to customer service
+    - I want to talk to a human representative
+    - Please transfer me to a human
+    - I need human assistance

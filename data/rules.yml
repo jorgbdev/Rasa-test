@@ -1,0 +1,32 @@
+version: "3.1"
+
+rules:
+
+- rule: Respond to greet
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- rule: Handover to human
+  steps:
+    - intent: request_human
+    - action: action_human_handover
+
+- rule: Default fallback rule
+  steps:
+    - intent: nlu_fallback
+    - action: action_default_fallback
+
+- rule: Activate information form
+  steps:
+    - intent: ask_info
+    - action: information_form
+    - active_loop: information_form
+
+- rule: Submit information form
+  condition:
+    - active_loop: information_form
+  steps:
+    - action: information_form
+    - active_loop: null
+    - action: action_fetch_info

@@ -1,0 +1,81 @@
+version: "3.1"
+
+intents:
+  - greet
+  - ask_info
+  - request_human
+  - inform
+  - nlu_fallback
+
+entities:
+  - theme
+  - topic
+  - info_type
+
+slots:
+  theme:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: theme
+        conditions:
+          - active_loop: information_form
+            requested_slot: theme
+      - type: from_text
+        conditions:
+          - active_loop: information_form
+            requested_slot: theme
+
+  topic:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: topic
+        conditions:
+          - active_loop: information_form
+            requested_slot: topic
+      - type: from_text
+        conditions:
+          - active_loop: information_form
+            requested_slot: topic
+
+  info_type:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: info_type
+        conditions:
+          - active_loop: information_form
+            requested_slot: info_type
+      - type: from_text
+        conditions:
+          - active_loop: information_form
+            requested_slot: info_type
+
+forms:
+  information_form:
+    required_slots:
+      - theme
+      - topic
+      - info_type
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
+  utter_ask_info_type:
+    - text: "What information about {topic} would you like? You can ask about location, plans, courses, founded year, website, etc."
+  utter_ask_theme:
+    - text: "Which theme are you interested in? Options include University, Business Objective, Product Information, or FAQ."
+  utter_ask_topic:
+    - text: "What specific {theme} are you interested in?"
+  utter_default:
+    - text: "I'm sorry, I didn't understand that. Could you please rephrase?"
+
+actions:
+  - action_fetch_info
+  - action_human_handover
+  - action_default_fallback
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
